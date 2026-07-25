@@ -2,13 +2,14 @@
 
 # 🍎 MacSecCheck
 
-### Auditeur de posture de sécurité macOS — rapide, hors-ligne, piloté par les baselines NIST
+### Application macOS d'audit de posture de sécurité — pilotée par les baselines NIST mSCP
 
-**478 règles mSCP · 17 baselines (CIS, DISA STIG, NIST 800-53, CMMC…) · rapports signés SHA‑256**
+**Interface graphique native (Avalonia) · 478 règles mSCP · 17 baselines (CIS, DISA STIG, NIST 800‑53, CMMC…) · rapports signés SHA‑256**
 
-[![macOS](https://img.shields.io/badge/macOS-Sonoma_14_|_Tahoe_26-000000?logo=apple&logoColor=white)](https://www.apple.com/macos/)
+[![Dernière release](https://img.shields.io/github/v/release/ayinedjimi/MacSecCheck?label=derni%C3%A8re%20release&color=0071e3)](https://github.com/ayinedjimi/MacSecCheck/releases/latest)
+[![macOS](https://img.shields.io/badge/macOS-12%2B_Monterey_%E2%86%92_Tahoe_26-000000?logo=apple&logoColor=white)](https://www.apple.com/macos/)
 [![.NET 9](https://img.shields.io/badge/.NET-9.0-512BD4?logo=dotnet&logoColor=white)](https://dotnet.microsoft.com/)
-[![Apple Silicon](https://img.shields.io/badge/Apple_Silicon_+_Intel-universal-0071e3)](#-installation)
+[![Apple Silicon](https://img.shields.io/badge/Apple_Silicon_+_Intel-universal-0071e3)](#-telechargement--installation)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![By Ayi NEDJIMI Consultants](https://img.shields.io/badge/By-Ayi%20NEDJIMI%20Consultants-C50F1F)](https://ayinedjimi-consultants.fr)
 
@@ -20,30 +21,63 @@
 
 ## 🎯 En bref
 
-**MacSecCheck** audite en profondeur la configuration de sécurité d'un Mac (**macOS Sonoma 14** / **Tahoe 26**) et la compare aux référentiels officiels du **NIST macOS Security Compliance Project (mSCP)** — CIS, DISA STIG, NIST 800‑53, CMMC, CNSSI‑1253… Il produit un score, des constats priorisés et un **rapport JSON forensique signé SHA‑256** pour une étude a posteriori.
+**MacSecCheck** est une **application macOS native**, dotée d'une **interface graphique (Avalonia)**, qui audite en profondeur la configuration de sécurité d'un Mac et la compare aux référentiels officiels du **NIST macOS Security Compliance Project (mSCP)** — CIS, DISA STIG, NIST 800‑53, CMMC, CNSSI‑1253… Elle produit un score, des constats priorisés et un **rapport JSON forensique signé SHA‑256** pour une étude a posteriori. C'est le compagnon macOS naturel de [**WinCheckSec**](https://github.com/ayinedjimi/WinCheckSec), son équivalent pour Windows.
 
+- 🖥️ **Application graphique** — plus besoin de terminal : tout se pilote depuis une fenêtre native macOS.
+- 📦 **Autonome (self-contained)** — .NET 9, Avalonia et le moteur (478 règles mSCP) sont **embarqués** dans le `.app` ; rien à installer.
 - 🔒 **100 % local & hors‑ligne** — aucune donnée ne quitte le poste.
 - ⚡ **Rapide** — collecteurs exécutés en parallèle.
-- 📦 **Autonome** — un seul binaire natif (runtime .NET embarqué), rien à installer.
-- 🧾 **Rapport forensique** — contexte hôte, scores par catégorie, empreinte **SHA‑256** re‑vérifiable.
-- 🏛️ **Piloté par le NIST** — les 478 règles mSCP (commande de vérification + valeur attendue + remédiation + mapping CIS/NIST/DISA) sont **embarquées** dans le binaire.
+- 🧾 **Rapport forensique** — contexte hôte, scores par catégorie, empreinte **SHA‑256** re‑vérifiable, exportable en JSON.
+- 🏛️ **Piloté par le NIST** — les 478 règles mSCP (commande de vérification + valeur attendue + remédiation + mapping CIS/NIST/DISA + technique MITRE ATT&CK) sont **embarquées**.
+- 🖥️ **Universel** — macOS 12 (Monterey) et ultérieur, Intel & Apple Silicon.
 
-```text
-MacSecCheck — auditeur de securite macOS  v0.2.0
-================================================
-Baseline mSCP : cis_lvl1 (macOS 26) — 98 regles sur 5 sections, 478 regles indexees.
+---
 
-Hote     : macbook-pro (Darwin 25.0.0)
-Elevation: root
-Score    : 78/100
+## ⬇️ Téléchargement & installation
 
-── Chiffrement / FileVault
-   ✔ [Ok         ] Chiffrement FileVault du disque de demarrage : Actif
-── Integrite systeme / SIP
-   ✔ [Ok         ] System Integrity Protection (SIP) : Active
-── mSCP · Operating System
-   ✖ [High       ] Enable Gatekeeper : false   (attendu string=true)
-   ✔ [Ok         ] Ensure System Integrity Protection is Enabled : 1
+[![Télécharger la dernière release](https://img.shields.io/badge/⬇️_T%C3%A9l%C3%A9charger-derni%C3%A8re_release-0071e3?style=for-the-badge&logo=apple)](https://github.com/ayinedjimi/MacSecCheck/releases/latest)
+
+1. **Téléchargez** l'archive : [**MacSecCheck-macOS-app.zip**](https://github.com/ayinedjimi/MacSecCheck/releases/download/v0.3/MacSecCheck-macOS-app.zip) (≈ 74 Mo) depuis la [**dernière release**](https://github.com/ayinedjimi/MacSecCheck/releases/latest).
+2. **Double-cliquez** sur le zip pour le décompresser.
+3. **Glissez `MacSecCheck.app`** dans votre dossier **Applications**.
+4. Au premier lancement, faites **clic‑droit → Ouvrir** (l'app n'est pas encore signée Developer ID / notarisée — signature ad‑hoc).
+5. Cliquez sur **« Analyser »** — c'est tout.
+
+> 📦 **Application autonome (self-contained)** : le runtime **.NET**, le framework **Avalonia** et le moteur d'audit (**478 règles mSCP**) sont **tous embarqués** dans `MacSecCheck.app`. Aucune dépendance à installer, aucun accès réseau requis. Compatible **macOS 12 et ultérieur**, architectures **Intel et Apple Silicon**.
+
+### Depuis les sources
+```bash
+git clone https://github.com/ayinedjimi/MacSecCheck.git
+cd MacSecCheck
+dotnet publish -c Release -r osx-arm64 --self-contained true -p:PublishSingleFile=true
+# Intel : -r osx-x64
+```
+
+---
+
+## 🖼️ L'application
+
+MacSecCheck se présente comme une véritable application macOS, structurée autour d'une **barre latérale** de navigation :
+
+- **Vue d'ensemble** + une entrée par **catégorie** de contrôles, chacune affichant un **badge de gravité coloré** (Critique / Élevé / Moyen / Faible / OK) reflétant l'état de ses constats.
+- **Écran d'accueil** avec titre et auteur de l'application.
+- **Sélecteur de baseline** : **« Tous »** est sélectionné par défaut (`all_rules`, les **478 règles**), avec au choix `cis_lvl1`, `cis_lvl2`, `disa_stig`, `800-53r5_high`, et les autres baselines du mSCP.
+- Bouton **« Analyser »** pour lancer l'audit.
+- **Vue d'ensemble** : score global **/100** avec grade coloré (A → F), et cartes de synthèse par gravité (Critique / Élevé / Moyen / Faible / OK).
+- **Vue catégorie** : liste de constats **dépliables**, chacun avec son détail, sa **remédiation**, sa **référence** (CIS / NIST 800‑53 / DISA STIG) et la **technique MITRE ATT&CK** associée.
+- **Export** : génération d'un rapport **JSON forensique signé SHA‑256**, pour archivage ou analyse ultérieure.
+
+### Aperçu réel d'une analyse
+
+```
+Baseline : all_rules — 333 règles sur 10 sections
+Score    : 47/100  (grade D)
+⛔ SIP .................. Désactivé   (Critique)
+✖  FileVault ........... Inactif     (Élevé)
+✔  Gatekeeper .......... Actif       (OK)
+✔  XProtect ............ v5352       (OK)
+▲  Pare-feu applicatif . Inactif     (Moyen)
+▲  SSH / Partage écran . Actifs      (Moyen)
 ```
 
 ---
@@ -67,11 +101,16 @@ Chaque constat porte une **gravité**, une **valeur observée vs attendue**, une
 
 ## 🏛️ Baselines mSCP (NIST)
 
-Les règles et baselines YAML du [**NIST macOS Security Compliance Project**](https://github.com/usnistgov/macos_security) (domaine public) sont **embarquées** dans le binaire — aucune arborescence externe requise.
+Les règles et baselines YAML du [**NIST macOS Security Compliance Project**](https://github.com/usnistgov/macos_security) (données publiées sous licence **NIST**, domaine public / œuvre du gouvernement américain) sont **embarquées** dans l'application — aucune arborescence externe requise.
 
 - **478 règles** indexées, **17 baselines** macOS 26.
+- La baseline **« Tous » (`all_rules`)** est sélectionnée par défaut dans l'interface et couvre l'intégralité des 478 règles.
 - `cis_lvl1` → 98 règles / 5 sections (Auditing, Operating System, Password Policy, System Settings, Supplemental).
 - Un **collecteur par section** exécute le `check` de chaque règle et compare la sortie à la valeur attendue → conforme / écart (gravité issue de la sévérité **DISA STIG**).
+
+Baselines disponibles : `cis_lvl1`, `cis_lvl2`, `disa_stig`, `800-53r5_high/moderate/low`, `cmmc_lvl1/2`, `cnssi-1253_high/moderate/low`, `cisv8`, `800-171`, `hicp_lp`, `nlmapgov_base/plus`, `all_rules`.
+
+La CLI reste disponible pour les usages scriptés / CI :
 
 ```bash
 ./macseccheck --list-baselines            # liste les baselines disponibles
@@ -81,32 +120,11 @@ Les règles et baselines YAML du [**NIST macOS Security Compliance Project**](ht
 ./macseccheck --mscp /chemin/macos_security   # utilise un checkout externe (données à jour)
 ```
 
-Baselines disponibles : `cis_lvl1`, `cis_lvl2`, `disa_stig`, `800-53r5_high/moderate/low`, `cmmc_lvl1/2`, `cnssi-1253_high/moderate/low`, `cisv8`, `800-171`, `hicp_lp`, `nlmapgov_base/plus`, `all_rules`.
-
----
-
-## 🚀 Installation
-
-### Binaire portable (recommandé)
-1. Téléchargez `macseccheck` (arm64 ou x64) depuis la [**dernière release**](https://github.com/ayinedjimi/MacSecCheck/releases/latest).
-2. `chmod +x macseccheck`
-3. `sudo ./macseccheck` — certains contrôles exigent `root` (SSH, audit, SIP complet).
-
-> Binaire non notarisé : au premier lancement, faites **clic‑droit → Ouvrir**, ou `xattr -d com.apple.quarantine macseccheck`.
-
-### Depuis les sources
-```bash
-git clone https://github.com/ayinedjimi/MacSecCheck.git
-cd MacSecCheck
-dotnet publish -c Release -r osx-arm64 --self-contained true -p:PublishSingleFile=true
-# Intel : -r osx-x64
-```
-
 ---
 
 ## 🧾 Rapport forensique
 
-Le rapport JSON (sauvegardé sur le Bureau) contient : `SchemaVersion`, contexte `Host`, bloc `Execution`, `Summary` (score + grade + décompte par gravité), scores par catégorie, `Modules` horodatés avec chaque constat, et un bloc **`Integrity`** (empreinte **SHA‑256** re‑vérifiable). Code retour : `0` si score ≥ 40, `2` sinon (exploitable en CI).
+Le rapport JSON exporté depuis l'application contient : `SchemaVersion`, contexte `Host`, bloc `Execution`, `Summary` (score + grade + décompte par gravité), scores par catégorie, `Modules` horodatés avec chaque constat, et un bloc **`Integrity`** (empreinte **SHA‑256** re‑vérifiable). Code retour CLI : `0` si score ≥ 40, `2` sinon (exploitable en CI).
 
 ---
 
@@ -114,10 +132,11 @@ Le rapport JSON (sauvegardé sur le Bureau) contient : `SchemaVersion`, contexte
 
 - [x] Moteur multiplateforme + 7 collecteurs natifs
 - [x] Intégration des baselines mSCP (478 règles / 17 baselines)
+- [x] **Interface graphique** (Avalonia)
+- [x] **Packaging `.app` autonome** (self-contained, .NET + Avalonia + moteur embarqués)
 - [ ] Collecteurs TCC (permissions vie privée), extensions système/kext, profils MDM, Lockdown Mode, Secure Boot (`bputil`)
 - [ ] Exports PDF / HTML / SARIF
-- [ ] UI **Avalonia** (interface graphique partageant le moteur)
-- [ ] Packaging `.app` **signé + notarisé**, binaire universel
+- [ ] Packaging **signé Developer ID + notarisé**, binaire universel officiel
 
 Détails d'architecture : [`docs/ARCHITECTURE.fr.md`](docs/ARCHITECTURE.fr.md) · Guide d'utilisation : [`docs/USAGE.fr.md`](docs/USAGE.fr.md).
 
