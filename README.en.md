@@ -57,6 +57,11 @@ dotnet publish -c Release -r osx-arm64 --self-contained true -p:PublishSingleFil
 
 ## 🖼️ The application
 
+<div align="center">
+<img src="docs/screenshots/macseccheck.png" alt="MacSecCheck — native macOS application" width="840">
+<br><em>MacSecCheck v0.3 — native macOS application (real screenshot)</em>
+</div>
+
 MacSecCheck presents itself as a true macOS application, organized around a navigation **sidebar**:
 
 - **Overview** plus one entry per **category** of checks, each displaying a **colored severity badge** (Critical / High / Medium / Low / OK) reflecting the state of its findings.

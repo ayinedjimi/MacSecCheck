@@ -57,6 +57,11 @@ dotnet publish -c Release -r osx-arm64 --self-contained true -p:PublishSingleFil
 
 ## 🖼️ L'application
 
+<div align="center">
+<img src="docs/screenshots/macseccheck.png" alt="MacSecCheck — application macOS native" width="840">
+<br><em>MacSecCheck v0.3 — application native macOS (capture réelle)</em>
+</div>
+
 MacSecCheck se présente comme une véritable application macOS, structurée autour d'une **barre latérale** de navigation :
 
 - **Vue d'ensemble** + une entrée par **catégorie** de contrôles, chacune affichant un **badge de gravité coloré** (Critique / Élevé / Moyen / Faible / OK) reflétant l'état de ses constats.
